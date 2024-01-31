@@ -20,10 +20,13 @@ function TextForm(props) {
   return (
     <>
       <div className="container"><div className="mb-3">
-        <label for="myBox" className="form-label">
+        <label htmlFor="myBox" className="form-label mt-5">
           {props.heading}
         </label>
         <textarea
+          style={{backgroundColor: 
+          props.mode==='dark'?'#042743':'white' , 
+          color: props.mode==='dark'?'white':'black'}}
           className="form-control"
           id="myBox"
           rows="10"
@@ -39,7 +42,7 @@ function TextForm(props) {
         <p>{text.split(" ").length} words and {text.length} characters.</p>
         <p>Time to Read: {0.48* text.split(" ").length} sec</p>
         <h1>Preview</h1>
-        <p>{text}</p>
+        <p>{text.length>0?text:"Enter Something"}</p>
 
       </div>
     </>
