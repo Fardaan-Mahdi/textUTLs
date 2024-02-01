@@ -1,47 +1,81 @@
-import './App.css';
-import Navbar from './components/Navbar';
-import TextForm from './components/TextForm';
-import Alert from './components/Alert'
-import React,{ useState } from 'react';
-// import About from './components/About';
+import "./App.css";
+import Navbar from "./components/Navbar";
+import TextForm from "./components/TextForm";
+import Alert from "./components/Alert";
+import About from "./components/About";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [mode, setMode]=useState('light');
-  const [alert,setAlert]=useState(null);
+  const [mode, setMode] = useState("light");
+  // const [greenMode,setGreenMode]=useState("light");
+  const [alert, setAlert] = useState(null);
 
-  const showAlert=(message,type)=>{
+  const showAlert = (message, type) => {
     setAlert({
       msg: message,
-      type: type
-    })
-    setTimeout(()=>{setAlert(null)},1500);
-  }
-  const toggleMode=()=>{
-    if (mode === 'dark') {
-      document.body.style.backgroundColor = 'white';
-      document.body.style.color = 'black';
-      showAlert("Light mode has been enabled","success")
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 1500);
+  };
+
+  const toggleMode = () => {
+    if (mode === "dark") {
+      document.body.style.backgroundColor = "white";
+      document.body.style.color = "black";
+      showAlert("Light mode has been enabled", "success");
     } else {
-      document.body.style.backgroundColor = '#042743';
-      document.body.style.color = 'white';
-      showAlert("Dark mode has been enabled","success")
+      document.body.style.backgroundColor = "#042743";
+      document.body.style.color = "white";
+      showAlert("Dark mode has been enabled", "success");
     }
-  
-    setMode(prevMode=>(prevMode==='light'? 'dark':'light'))
-    
-  }
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  };
+  // const toggleGreen=()=>{
+  //   if (greenMode === 'green') {
+  //     document.body.style.backgroundColor = 'white';
+  //     document.body.style.color = 'black';
+  //     showAlert("Light mode has been enabled","success")
+  //   } else {
+  //     document.body.style.backgroundColor = '#228B22';
+  //     document.body.style.color = 'white';
+  //     showAlert("Green mode has been enabled","success")
+  //   }
+  //   setGreenMode(prevMode=>(prevMode==='light'? 'green':'light'))
+  // }
+
   return (
-    <>
-      <Navbar  title="textUTLs" about="About" mode={mode} toggleMode={toggleMode}/>
+    <Router>
+      <Navbar
+        title="textUTLs"
+        about="About"
+        mode={mode}
+        // greenMode={greenMode}
+        toggleMode={toggleMode}
+        // toggleGreen={toggleGreen}
+      />
       {/* <Navbar /> */}
-      <Alert alert={alert}/>
+      <Alert alert={alert} />
 
       <div className="container">
-        <TextForm showAlert={showAlert} heading='Enter Text' mode={mode}/>
-        {/* <About/> */}
+        <Routes>
+          <Route exact path="/about" element={<About />} />
+          <Route
+            exact path="/"
+            element={
+              <TextForm
+                showAlert={showAlert}
+                heading="Enter Text"
+                mode={mode}
+                // greenMode={greenMode}
+              />
+            }
+          />
+        </Routes>
       </div>
-      
-    </>
+    </Router>
   );
 }
 

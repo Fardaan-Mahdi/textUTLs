@@ -20,6 +20,14 @@ function TextForm(props) {
     setText("")
     props.showAlert("Cleared","info");
   }
+
+  const wordsCount=(text)=>{
+    if(text===""){
+        return 0;
+    }
+    const array=text.trim().split(/\s+/);
+    return array.length;
+  }
   return (
     <>
       <div className="container"><div className="mb-3">
@@ -42,7 +50,7 @@ function TextForm(props) {
       </div></div>
       <div className="container">
         <h1>Your Text Summary</h1>
-        <p>{text.split(" ").length} words and {text.length} characters.</p>
+        <p>{wordsCount(text)} words and {text.length} characters.</p>
         <p>Time to Read: {0.48* text.split(" ").length} sec</p>
         <h1>Preview</h1>
         <p>{text.length>0?text:"Enter Something"}</p>

@@ -2,8 +2,8 @@ import React, {useState} from "react";
 
 function About() {
     const[myStyle,setStyle]=useState({
-        color: 'white',
-        backgroundColor: 'black'
+        color: 'black',
+        backgroundColor: 'white'
     });
 
     const [btnText,setBtnText]=useState('Dark Mode');
