@@ -5,10 +5,12 @@ function TextForm(props) {
   const handleUPClick=()=>{
     console.log("button was clicked:!");
     setText(text.toUpperCase());
+    props.showAlert("Converted to uppercase","info");
   }
   const handleDOWNClick=()=>{
     console.log("button was clicked:!");
     setText(text.toLowerCase());
+    props.showAlert("Converted to lowercase","info");
   }
   const handleChange=(e)=>{
     console.log("on change");
@@ -16,6 +18,7 @@ function TextForm(props) {
   }
   function handleClear(){
     setText("")
+    props.showAlert("Cleared","info");
   }
   return (
     <>
